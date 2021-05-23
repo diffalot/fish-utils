@@ -10,13 +10,35 @@ with source code that made for a great guidebook.
 - formatting: ***(changes file in place)*** [`fish_indent --ansi --write`](https://fishshell.com/docs/current/cmds/fish_indent.html)
 - testing: tko
 
-example setup for a quick development loop:
+example steps for a quick development loop:
 
 ```
 fish --no-execute functions/setup-diff-tide-prompt.fish
-fish --ansi --write
+fish --write functions/setup-diff-tide-prompt.fish
 source functions/setup-diff-tide-prompt.fish
 
 setup-diff-tide-prompt
+```
+
+Which could be a function
+
+```
+function dev-feedback -a source fun
+    fish --no-execute $source
+    fish_indent --write $source
+    fish source $source
+    $fun $args
+end
+```
+
+That I couldn't figure out how to run with onchange
+
+```
+# npm i -g onchange
+# 
+# onchange --initial --kill "**/*.fish" -- \
+#     dev-feedback \
+#     function/setup-diff-tide-prompt.fish \
+#     setup-diff-tide-prompt
 ```
 
