@@ -33,14 +33,14 @@ set -U tide_pwd_truncate_margin 60
 "
 
     set -l _diff_left_prompt \
-        os pwd \
+        os jobs context \
         newline \
-        jobs status vi_mode prompt_char
+        rust virtual_env chruby nvm status vi_mode prompt_char
 
     set -l _diff_right_prompt \
-        cmd_duration context \
+        cmd_duration pwd \
         newline \
-        nvm chruby virtual_env rust git
+        git
 
     _diff_print_tide_prompt_setters "Replacing prompt settings:" "$tide_left_prompt_items" "$tide_right_prompt_items"
     _diff_print_tide_prompt_setters "New prompt settings:" "$_diff_left_prompt" "$_diff_right_prompt"
