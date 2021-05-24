@@ -8,7 +8,7 @@ with source code that made for a great guidebook.
 
 - linting: [`fish --no-execute`](https://fishshell.com/docs/current/cmds/fish.html)
 - formatting: ***(changes file in place)*** [`fish_indent --ansi --write`](https://fishshell.com/docs/current/cmds/fish_indent.html)
-- testing: tko
+- testing: tk
 
 example steps for a quick development loop:
 
@@ -27,7 +27,9 @@ function dev-feedback -a source fun
     fish --no-execute $source
     fish_indent --write $source
     fish source $source
-    $fun $args
+    if test -n $args
+        $fun $args
+    end
 end
 ```
 

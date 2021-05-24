@@ -4,8 +4,8 @@
 # https://github.com/IlanCosman/tide/wiki/Configuration
 #
 # linting: [`fish --no-execute`](https://fishshell.com/docs/current/cmds/fish.html)
-# formatting: ***(Changes file in place)*** [`fish_indent --ansi --write`](https://fishshell.com/docs/current/cmds/fish_indent.html)
-# via the [tide contribution guidelines](https://github.com/IlanCosman/tide/blob/main/CONTRIBUTING.md)
+# formatting: ***(changes file in place)*** [`fish_indent --ansi --write`](https://fishshell.com/docs/current/cmds/fish_indent.html)
+# via the [tide contribution guidelines](https://github.com/ilancosman/tide/blob/main/contributing.md)
 #
 # quick development loop commands:
 #
