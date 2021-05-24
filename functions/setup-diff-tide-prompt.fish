@@ -33,6 +33,7 @@ set -U tide_pwd_truncate_margin 60
 "
 
     set -l _diff_left_prompt \
+        # host_emoji jobs context \
         os jobs context \
         newline \
         rust virtual_env chruby nvm status vi_mode prompt_char
