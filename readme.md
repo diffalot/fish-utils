@@ -1,5 +1,9 @@
 # general fish shell utilities
 
+## Fish shell programming guides and information
+
+[zero lenght string testing](https://stackoverflow.com/questions/47743015/fish-shell-how-to-check-if-a-variable-is-set-empty#:~:text=test%20%2Dn%20%22%24var%22,true%20if%20it%20is%20empty)
+
 ## development notes
 
 many thanks to the [tide contribution

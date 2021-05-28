@@ -26,11 +26,11 @@ function setup-diff-tide-prompt
     set -U tide_context_always_display true
     set -U tide_pwd_truncate_margin 60
 
-    echo "Set tide display variables:
-set -U tide_print_newline_before_prompt true
-set -U tide_context_always_display true
-set -U tide_pwd_truncate_margin 60
-"
+    echo "\t\tSet tide display variables:
+        set -U tide_print_newline_before_prompt true
+        set -U tide_context_always_display true
+        set -U tide_pwd_truncate_margin 60
+        "
 
     set -l _diff_left_prompt \
         os jobs context \
