@@ -4,16 +4,13 @@ function session-kak
     set -S session
     set -S kak_sessions
 
-    set -l session_exists (contains $session kak_sessions)
-    set -S session_exists
+    if contains $session $kak_sessions
+        echo joining $session
+        kak -c $session $argv
+    else
+        echo starting $session
+        kak -s $session $argv
+    end
 
-    #if test -n session_exists[1]
-    #    echo joining $session
-    #    session -c $session $argv
-    #else
-    #    echo starting $session
-    #    session -s $session $argv
-    #end
-    
     set -l
 end
