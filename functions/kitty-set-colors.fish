@@ -1,11 +1,20 @@
 #!/usr/bin/env fish
 
 function color_check
-    if tput cols > 120 
-        hex-block; color-support ; crunchbang-mini ; colorview; 
+    if tput cols > 99
+        crunchbang;
     end
-    if tput cols > 75
-        hex-block; alpha; colortest;
+    if tput cols > 55
+        crunchbang-mini;
+        colorview;
+        crunchbang;
+        color-support;
+        alpha;
+    end
+    if tput cols > 99
+        hex-block;
+        colortest; 
+        crunchbang;
     end
     colorwheel
 end
