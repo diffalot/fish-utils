@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-function scheme-tmux -a scheme
+function scm-tmux -a scheme
 
     # don't override these unless you are very careful about it
     set -l info green
@@ -16,18 +16,26 @@ function scheme-tmux -a scheme
     switch $scheme
         case 'day'
             echo using $scheme scheme
-            set darkest colour250
-            set lightest colour242
-            set grayest colour238      
-            set counterpoint '#5f9ea0' # cadetblue
-            set highlight '#2e8b57' # darkslateblue
+            set -g darkest colour250
+            set -g lightest colour242
+            set -g grayest colour238      
+            set -g counterpoint '#5f9ea0' # cadetblue
+            set -g highlight '#2e8b57' # darkslateblue
+        case 'light-green'
+            echo using $scheme scheme
+            set -g darkest '#20b2aa'
+            set -g lightest '#f5fffa'
+            set -g grayest '#00ced1'
+            set -g highlight '#b1a8e5'
+            set -g counterpoint '#f3dcf3' # darkslateblue
         case '*'
             echo 'no scheme set, using defaults'
     end
     
     # Copied from .tmux.config edited by hand
-    tmux set -g status-bg $darkest
-    tmux set -g status-fg $lightest
+    tmux set -g status-bg "$darkest"
+    tmux set -g status-fg "$lightest"
+    tmux set -g status-style "bg=$darkest,fg=$lightest"
 
     tmux set-window-option -g window-status-style fg=$lightest
     tmux set-window-option -g window-status-activity-style fg=$warn,blink
@@ -41,22 +49,14 @@ function scheme-tmux -a scheme
 
     tmux set-option -g message-style bg=$darkest,fg=$counterpoint,blink
 
-    # status left
-    tmux set -g status-left "#{?client_prefix,#[fg=$highlight]#[bg=$grayest],} #{simple_git_status} ⁂ #S ❱ #[default]"
-
-    # the backround color of the right status is controlled by cpu temp
-    # the text colour is the default green to yellow to red as ram fills
-    tmux set -g @cpu_low_bg_color "#[bg=default]" # background color when cpu is low
-    tmux set -g @cpu_medium_bg_color "#[bg=$darkest,$greyest]" # background color when cpu is medium
-    tmux set -g @cpu_high_bg_color "#[bg=$darkest,$greyest]" # background color when cpu is high
-    tmux set -g @ram_low_fg_color "#[fg=$darkest,$greyest]" # background color when cpu is low
-    tmux set -g @ram_medium_fg_color "#[fg=$darkest,$greyest]" # background color when ram is medium
-    
     # status right
-    # TODO: Turn the right status back on
-    tmux set -g status-right '#{ram_fg_color}#{cpu_bg_color} %Hh #{cpu_percentage} #{ram_percentage} '
+    tmux set -g status-right "#{?client_prefix,#[fg=$highlight]#[bg=$grayest],} ❰ #W #I:#P ⁂ "
+
+    # status left
+    tmux set -g status-left "#{?client_prefix,#[fg=$highlight]#[bg=$grayest],} ⁂ #S ❱❱ #[bg=$darkest,fg=$lightest]"
 
     # end copied shit
+    #
 end
 
 #     set -g night_window_style fg=$lightest bg=$darkest

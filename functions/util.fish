@@ -1,6 +1,13 @@
 #!/usr/bin/env fish
 
-function color_check
+
+# random, useless, and cool
+
+function color_check 
+    color_blast $argv
+end
+
+function color_blast
     if tput cols > 99
         crunchbang;
     end

@@ -1,4 +1,34 @@
-# general fish shell utilities
+# ***The Library of M. Diffalot***
+
+> general fish shell utilities
+
+# naming conventions
+
+The patterns for installing functions into the `~/.config/fish/{functions|conf.d|completions}`
+directories are prone to collisions, so it's polite to add a unique namespace at the beginning for each
+project.   When I first began this library, it was hardly more than your average bohemian
+neighborhood little
+library library box, despite the blued steel trimmings and armed reconasaiance drones that circled
+my compound at night.  I was such a sweet  young thing, pure foolishness to think I could publish a
+library called `utils` and not step on anyone's toes.  
+
+Nowadays, I make up a namespace for each project to group them together and everything else just
+gets thrown in with all the other `_mdiff_{*}` files where at least they won't get lonely, poor
+dears.
+
+namespaced - this is a primary entrypoint script that may or may not call other scripts in its
+namespace
+
+namespaced-on-a-kebab - this script was designed from the ground up to be convenient for you to type
+into your terminal, so typetypetype, get to it!
+
+namespaced_on_a_wire - this is mostly for internal use, but have fun if you can make it run on it's
+own and do something useful, go for it!
+
+_namespaced_on_a_wire_and_afraid_of_heights - this is a script for scripts, keep your paws off.  it's sourced in your
+shell because one of my scripts needs it, and you need my scripts, so, you see where this all ends
+up, buddy-boy?? (but really do whatever you want with it, if you break it, download another)
+
 
 ## Sessions and Projects
 

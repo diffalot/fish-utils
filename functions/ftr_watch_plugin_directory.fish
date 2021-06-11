@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-source ../functions/_ftr_utils.fish
+source _ftr_utils.fish
 
 function ftr_watch_plugin_directory -a directory_to_watch
 
@@ -54,7 +54,7 @@ function ftr_watch_plugin_directory -a directory_to_watch
     # m the one who put those there   
 
 
-    if test (is_debug_mode($debug))
+    if test (is_debug_mode $debug)
         set -l
         printf "%s finished" (status -f)
     end
