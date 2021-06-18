@@ -45,10 +45,8 @@ function kitty-set-colors
         if test -n "$argv"
           set maybe_query \-\-query $argv
         end
-        set -l theme (find "$HOME/.config/kitty/kitty-themes/themes" \
-              "$HOME/.config/kitty/base16-kitty/colors" \
-              "$HOME/Desktop/colors/iTerm2-Color-Schemes/kitty" \
-              -type f | fzf --reverse --delimiter / --with-nth -1 \
+        set -l theme (find "$HOME/Deskto" \
+              -type f | sort -R | fzf --reverse --delimiter / --with-nth -1 \
               --bind "?:toggle-preview" --preview 'echo {}' \
               --preview-window hidden:up:wrap $maybe_query)
 
