@@ -2,6 +2,39 @@
 
 source _ftr_utils.fish
 
+# event hub, decision maker
+# listens for variable changes and emits events
+# events go down the stack to trigger actions and variables changes are 
+# listened for where they were created
+# 
+# file:///usr/local/Cellar/fish/3.2.2_1/share/doc/fish/cmds/emit.html
+# 
+# Activity_Group_Controller 
+# _prefix_HUB_ABC_Admin_Belt_Control
+# (_ftr_HUB_FCD_File_Change_Directorate)
+#          AGC is the abbreviation for the group name, essentially, which hub?
+#              the hubis identified as the controller by the capitalized group name
+#              without any tasks mentioned, better example might be
+#       user scripts interact with hubs
+#
+# event handlers
+# _prefix_sv__ABC_belt_tensioner (subscribes to events and updates variables)
+# _prefix__vp_ABC_belt_tension_monitor (processes uupdates from beld tensioners and updates managers 
+           #                           
+# _prefix_svp_ABC_belt_tension_manager (observes whole tensioning process and provides status and reports for hub)
+# (any process that is not at least 2 of svp must not be expected to survive)
+# function names :
+#   _ftr : standard lib namespace
+#   _s : subscribes to an event (S if subscribes to _many_ (means it should probably be broken apart))
+#   _v : communicates upstream via variables 
+#   _p : publishes events for subscribers to act on (P if subscribes to more than one(similarly, is probably doing too much))
+#   _EVENT_NAME or .. : the event the function tracks
+#   _action : what this function does
+# 
+# event name: _ftr_e_EVENT_NAME
+#   _ftr : standard lib namespace
+#   _e : this is an event
+
 function ftr_watch_plugin_directory -a directory_to_watch
 
     argparse 'help' 'debug' -- $argv
