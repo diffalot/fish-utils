@@ -44,3 +44,47 @@ function _ftr_indent -a padding
       printf '%b\n' (eval $s1d $line)
    end
 end
+
+function _ftr_source_directory --argument-names directory # full_tree_find regex
+    # set -l $maxdepth # TODO: accept these arguments
+    # set -l $regex_string
+    if test "$debug" = 'true'
+        echo "Running in " (status)
+        echo "find $directory -maxdepth 1 -regex '.*\.fish\$' | sort | xargs -I {} cat {} | source"
+        echo "running find in $directory for.fish files to source"
+        echo (find $directory -maxdepth 1 -regex '.*\.fish\$' | sort)
+        echo "And now sourcing"
+    end
+
+    find $directory -maxdepth 1 -regex '.*\.fish\$' | sort | xargs -I {} cat {} | source
+end
+
+#function flagged_help
+
+# DOCS: all user-facing-functions should check their arguments and fail gracefully because _internal_functions should fail hard and exit with a stack trace
+function ftr-source-plugin-directory --description "
+- Sources all `*.fish` files in <directory>/{conf.d|functions|completions} if they exist.
+- If no directory is provided, the current directory is assumed.
+" \
+    --argument-names target_directory
+
+    set -l usage "ftr-source-plugin-directory <directory>"
+    # if _help_flagged $argv
+    if test -z $directory
+        set $target_directory (pwd)
+    end
+    set -l sourced_directories
+    for directory in conf.d functions completions
+        if test -d $directory
+            _ftr_source_directory $plugin_directory/$directory
+            if $status -eq 0
+                set -a sourced_directories $directory
+            end
+        end
+    end
+    if test (count sourced_directories) -eq 0
+        set_color yellow --bold
+        echo "No `completions`, `conf.d`, or `functions` directories were found in `$target_directory` so nothing was sourced"
+        set_color normal
+    end
+end

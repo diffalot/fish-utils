@@ -1,56 +1,13 @@
 #!/usr/bin/env fish
 
-function _source_directory --argument-names directory # full_tree_find regex
-    # set -l $maxdepth # TODO: accept these arguments
-    # set -l $regex_string 
-    if test "$debug" = 'true'
-        echo "Running in " (status) 
-        echo "find $directory -maxdepth 1 -regex '.*\.fish\$' | sort | xargs -I {} cat {} | source"
-        echo "running find in $directory for.fish files to source"
-        echo (find $directory -maxdepth 1 -regex '.*\.fish\$' | sort)
-        echo "And now sourcing"
-    end
-
-    find $directory -maxdepth 1 -regex '.*\.fish\$' | sort | xargs -I {} cat {} | source
-end
-
-#function flagged_help
-
-# DOCS: all user-facing-functions should check their arguments and fail gracefully because _internal_functions should fail hard and exit with a stack trace
-function source-plugin-directory --description "
-- Sources all `*.fish` files in <directory>/{conf.d|functions|completions} if they exist.
-- If no directory is provided, the current directory is assumed.
-" \
-    --argument-names target_directory
-
-    set -l usage "source-plugin-directory <directory>"
-    # if _help_flagged $argv 
-    if test -z $directory
-        set $target_directory (pwd)
-    end
-    set -l sourced_directories
-    for directory in conf.d functions completions
-        if test -d $directory
-            _source_directory $plugin_directory/$directory
-            if $status -eq 0
-                set -a sourced_directories $directory
-            end
-        end
-    end
-    if test (count sourced_directories) -eq 0
-        set_color yellow --bold
-        echo "No `completions`, `conf.d`, or `functions` directories were found in `$target_directory` so nothing was sourced"
-        set_color normal
-    end
-end
-
-function setup_debug
-    # if debug is set
-    return 0
-end
-
-function string_is
+# Changed this after lifting it from SO because I'm not ready to not know if the string builtins are misbehaving or if my code is fucking them up.
+# https://stackoverflow.com/a/52798873/10377319
+# NOTE: now that I've played with it a bit, I'm thinking that the switch order should be reversed so that the you won't get false positives
+# Like run the pattern check for each of these starting with integer and binary and get back a list of all the things the string could be???
+# then make a simpler version that gets the list and resolves by glancing through it...
+function string_is --description "string_is <type> <string under test>"
     if set -q argv[1]
+        echo looking for $argv[1]
         set -l pattern
         switch $argv[1]
             case int integer
@@ -71,14 +28,14 @@ function string_is
                 echo "unknown class..." >&2
                 return
         end
-        set argv match --quiet --regex -- $pattern $argv[3]
+        string match --quiet --regex -- $pattern $argv[2]
     end
 end
 
 
 # random, useless, and cool
 
-function color_check 
+function color_check
     color_blast $argv
 end
 
@@ -95,7 +52,7 @@ function color_blast
     end
     if tput cols > 99
         hex-block;
-        colortest; 
+        colortest;
         crunchbang;
     end
     colorwheel
